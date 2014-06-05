@@ -7,7 +7,9 @@ class Recipe
     @id = id
     @name = name
     @instructions = instructions
+    @instructions ||= "This recipe doesn't have any instructions."
     @description = description
+    @description ||= "This recipe doesn't have a description."
     @ingredients = ingredients
   end
 
@@ -25,7 +27,6 @@ class Recipe
     db_connection do |conn|
       query = "SELECT recipes.name, recipes.id, recipes.description, recipes.instructions
                FROM recipes
-               WHERE recipes.description IS NOT NULL AND recipes.instructions IS NOT NULL
                ORDER BY recipes.name"
       results = conn.exec(query)
     end
